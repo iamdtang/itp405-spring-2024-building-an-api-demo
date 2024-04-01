@@ -10,4 +10,6 @@ class Album extends Model
     use HasFactory;
 
     protected $primaryKey = 'AlbumId';
+    protected $fillable = ['Title', 'ArtistId'];
+    public $timestamps = false;
 }
