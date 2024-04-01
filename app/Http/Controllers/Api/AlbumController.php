@@ -51,7 +51,20 @@ class AlbumController extends Controller
      */
     public function update(Request $request, Album $album)
     {
-        //
+        $validation = Validator::make($request->all(), [
+             'Title' => 'required',
+             'ArtistId' => 'required',
+         ]);
+
+         if ($validation->fails()) {
+             return response()->json([
+                 'errors' => $validation->errors(),
+             ], 422);
+         }
+
+         $album->update($request->all());
+         
+         return $album;
     }
 
     /**
