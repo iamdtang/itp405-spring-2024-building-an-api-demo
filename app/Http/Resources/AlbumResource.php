@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class AlbumResource extends JsonResource
 {
+    public static $wrap = 'album';
+
     /**
      * Transform the resource into an array.
      *
@@ -15,5 +17,20 @@ class AlbumResource extends JsonResource
     public function toArray(Request $request): array
     {
         return parent::toArray($request);
+    }
+
+    public function with(Request $request)
+    {
+        $sideloadedData = [];
+
+        if ($request->query('include')) {
+            $relationshipsToSideload = explode(',', $request->query('include'));
+
+            foreach ($relationshipsToSideload as $relationship) {
+                $sideloadedData[$relationship] = $this->$relationship;
+            }
+        }
+
+        return $sideloadedData;
     }
 }
