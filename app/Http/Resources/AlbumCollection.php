@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class AlbumCollection extends ResourceCollection
 {
+    public static $wrap = 'albums';
+
     /**
      * Transform the resource collection into an array.
      *

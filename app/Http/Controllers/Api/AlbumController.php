@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 use App\Http\Resources\AlbumResource;
+use App\Http\Resources\AlbumCollection;
 
 class AlbumController extends Controller
 {
@@ -17,7 +18,7 @@ class AlbumController extends Controller
     public function index()
     {
         // return Album::all();
-        return Album::paginate();
+        return new AlbumCollection(Album::all());
     }
 
     /**

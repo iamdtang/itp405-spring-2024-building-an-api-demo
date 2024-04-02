@@ -16,7 +16,14 @@ class AlbumResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        // Just to show how we can change the format for both
+        // GET /albums and GET /albums/{id}. We may want to expose
+        // a different format that doesn't match the database.
+        return [
+            'id' => $this->AlbumId,
+            'title' => $this->Title,
+            'artistId' => $this->ArtistId,
+        ];
     }
 
     public function with(Request $request)
